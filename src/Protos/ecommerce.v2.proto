@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package ecommerce.v2; 
+
+service Products { 
+    rpc AddProduct(Product) returns (ProductId);
+    
+    rpc GetProduct(ProductId) returns (Product){
+        option (google.api.http) = {
+            get: "/v2/products/{value}"
+          };
+    }
+}
+
+message Product { 
+    int32 id = 1; 
+    string name = 2;
+    string description = 3;
+}
+
+message ProductId { 
+    int32 value = 1;
+}
